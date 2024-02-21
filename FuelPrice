@@ -1,0 +1,40 @@
+# Price
+# import requests
+
+def get_bitcoin_price(currency="usd"):
+    """
+    Get the current price of Bitcoin using the CoinGecko API.
+
+    Parameters:
+    - currency: The currency in which the price is requested (default is USD).
+
+    Returns:
+    - bitcoin_price: The current price of Bitcoin in the specified currency.
+    """
+
+    # CoinGecko API endpoint for Bitcoin
+    api_endpoint = "https://api.coingecko.com/api/v3/simple/price"
+    params = {"ids": "bitcoin", "vs_currencies": currency}
+
+    # Make a request to the API
+    response = requests.get(api_endpoint, params=params)
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        data = response.json()
+        bitcoin_price = data["bitcoin"][currency]
+        return bitcoin_price
+    else:
+        return None
+
+# Example usage:
+if __name__ == "__main__":
+    # Example usage with USD as the currency
+    bitcoin_price_usd = get_bitcoin_price()
+    
+    # Example usage with EUR as the currency
+    bitcoin_price_eur = get_bitcoin_price(currency="eur")
+
+    # Print the results
+    print(f"Bitcoin Price (USD): ${bitcoin_price_usd}")
+    print(f"Bitcoin Price (EUR): €{bitcoin_price_eur}")
