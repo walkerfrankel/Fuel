@@ -1,4 +1,4 @@
-# Price 9
+# Price 10
 # import requests
 
 def get_bitcoin_price(currency="usd"):
